@@ -1,0 +1,40 @@
+---
+import '../../assets/fonts.css';
+import '../../assets/global.css';
+import '../../assets/typography.css';
+import type { BrandConfig } from '../../core/interfaces/brand-configuration.interface';
+import { client } from '../../core/lib/sanity';
+
+const brandConfig: BrandConfig | null =
+    (await client.fetch(`*[_type == "brandConfig"][0]`)) ?? null;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+            rel="stylesheet"
+        />
+        <title>Seatify - Media & Marketing</title>
+    </head>
+    <body class="bg-sf-darker text-sf-light">
+        <main class="container mx-auto">
+            <!-- <Navbar brand={brandConfig} client:load /> -->
+            <slot />
+            <!-- <ContactDialog client:load /> -->
+        </main>
+    </body>
+</html>

@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sfv-gray-500: #6B6B6B;
+  --color-sfv-gray-400: #D9D9D9;
+  --color-sfv-gray-300: #C5C5C5;
+  --color-sfv-gray-200: #F2F7FA;
+  --color-sfv-gray-100: #D1D1D1;
+  --color-sfv-off-100: #F3F8FB;
+  --color-sfv-off-200: #F0F0F0;
+  --color-sfv-green-600: #A6F291;
+  --color-sfv-green-500: #D7FFCC;
+  --color-sfv-green-300: #CCFFF4;
+  --color-sfv-green-100: #91F2DD;
+
+  --font-inter: 'Inter', sans-serif;
+}
+
+@font-face {
+  font-family: 'BlauerNue';
+  src: url('/fonts/BlauerNue-Regular.ttf') format('truetype');
+}
+
+body {
+  font-family: 'BlauerNue', sans-serif;
+}
+
+.green-gradient-bg {
+  background: linear-gradient(270deg, #A6F291 64.01%, #91F2DD 100%);
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+  animation: dyn-gradient-move 5s linear infinite;
+}
+
+@keyframes dyn-gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  25% {
+    background-position: 50% 60%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  75% {
+    background-position: 50% 40%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.card-gradient {
+    border-radius: 48px;
+    border: 1px solid #FFF;
+    background: radial-gradient(107.73% 112.54% at 5.62% -1.42%, rgba(243, 248, 251, 0.20) 0%, rgba(243, 248, 251, 0.00) 100%);
+}
+
+.box-gradient {
+    border-radius: 48px;
+    background: radial-gradient(47.79% 27.15% at 50% 100.01%, rgba(145, 242, 221, 0.45) 0%, rgba(145, 242, 221, 0.00) 100%), #000;
+}
+
+/* Mobile only - keep same width, reduce height */
+@media (max-width: 480px) {
+    .box-gradient {
+        background: radial-gradient(47.79% 15% at 50% 100.01%, rgba(145, 242, 221, 0.45) 0%, rgba(145, 242, 221, 0.00) 100%), #000;
+    }
+}
+
+.button-gradient {
+    border-radius: 100px;
+    background: linear-gradient(to right, #A6F291 0%, #91F2DD 100%), #FFF;
+    box-shadow: 0 -3px 8px 0 rgba(0, 0, 0, 0.25) inset;
+}
+
+.bg-gradient {
+    background: radial-gradient(74.4% 42.26% at 50% 0%, rgba(145, 242, 221, 0.45) 0%, rgba(145, 242, 221, 0.00) 100%), #000;
+}
+
+.full-width {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+}
+
+
+textarea, input {
+  @apply bg-sfv-gray-400 w-full border border-sfv-gray-400 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sfv-green-100 text-black font-light;
+}
