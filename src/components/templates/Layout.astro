@@ -4,6 +4,8 @@ import '../../assets/global.css';
 import '../../assets/typography.css';
 import type { BrandConfig } from '../../core/interfaces/brand-configuration.interface';
 import { client } from '../../core/lib/sanity';
+import { ContactDialog } from './ContactDialog';
+import Navbar from '../molecules/Navbar/index'
 
 const brandConfig: BrandConfig | null =
     (await client.fetch(`*[_type == "brandConfig"][0]`)) ?? null;
@@ -30,11 +32,11 @@ const brandConfig: BrandConfig | null =
         />
         <title>Seatify - Media & Marketing</title>
     </head>
-    <body class="bg-sf-darker text-sf-light">
+    <body class="bg-red-400">
         <main class="container mx-auto">
-            <!-- <Navbar brand={brandConfig} client:load /> -->
+            <Navbar client:load />
             <slot />
-            <!-- <ContactDialog client:load /> -->
+            <ContactDialog client:load />
         </main>
     </body>
 </html>

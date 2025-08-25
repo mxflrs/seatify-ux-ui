@@ -1,9 +1,18 @@
 ---
 import Layout from "../components/templates/Layout.astro";
+import Hero from "../components/organisms/Hero"
+import Results from "../components/organisms/Results"
+import Footer from "../components/molecules/Footer"
+import Services from "../components/organisms/Services.astro";
+import Why from "../components/organisms/Why.astro";
 
-
+// *[_type == "landingPage" && title == "UXUI"]
 ---
 
 <Layout>
-	<h1>Hello</h1>
+	<Hero /> 
+	<Services />
+	<Results />
+	<Why />
+	<Footer />
 </Layout>
