@@ -18,7 +18,7 @@ const sectionData = createSectionData(landingPage);
 <Layout>
 	<Hero data={sectionData.hero}/>
 	<PainPromise data={sectionData.painPromise} />
-	<Services data={sectionData.services} />
+	<Services data={sectionData.services} client:load />
 	<Results data={sectionData.results}/>
 	<Why data={sectionData.why} />
 	<Footer data={sectionData.footer} />

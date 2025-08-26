@@ -9,6 +9,15 @@ interface Props {
 
 const { data } = Astro.props;
 if (!data) return;
+
+function optimizeVideoUrl(url: string) {
+    if (!url?.includes('cloudinary.com')) return url;
+    const params = 'q_auto,f_auto,fl_progressive';
+    if (url.includes('/upload/')) {
+        return url.replace('/upload/', `/upload/${params}/`);
+    }
+    return url;
+}
 ---
 
 <OutlineContainer extraClass="mt-32 px-20! py-24!">
@@ -24,9 +33,9 @@ if (!data) return;
     </div>
 
     {
-        data.caseStudies.map((c) => (
+        data.caseStudies.map((c, index) => (
             <div class="flex flex-col gap-4 border-2 border-b-white bg-black my-8 mx-4 *:text-white p-20 rounded-[88px]">
-                <p class="font-inter font-light">{c.subtitle}</p>
+                <p class="font-inter font-thin">{c.subtitle}</p>
                 <h4 class="pb-9 border-b pt-4 border-white">{c.title}</h4>
 
                 <div class="py-8 px-0 grid grid-cols-2 gap-8 rounded-4xl *:font-inter">
@@ -35,12 +44,24 @@ if (!data) return;
                         <div class="grid grid-cols-2 gap-4">
                             <div class="flex flex-col">
                                 <p class="font-extralight pb-4">Time on Page</p>
-                                <p>{c.timeOnPage}</p>
+                                <h3>{c.before.time}</h3>
                             </div>
-                            <div class="flex flex-col">
-                                <p class="font-extralight pb-4">Bounce Rate</p>
-                                <p>{c.bounceRate}</p>
-                            </div>
+                            {!c.title.includes('Namaste') && (
+                                <div class="flex flex-col">
+                                    <p class="font-extralight pb-4">
+                                        {c.title.includes('Jeff')
+                                            ? 'Booking Conversions'
+                                            : 'Bounce Rate'}
+                                    </p>
+
+                                    <h3>
+                                        {c.before.bounce}{' '}
+                                        {c.title.includes('Jeff')
+                                            ? '/month'
+                                            : '%'}
+                                    </h3>
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div class="flex flex-col bg-white *:text-black! p-12 rounded-4xl">
@@ -48,21 +69,148 @@ if (!data) return;
                         <div class="grid grid-cols-2 gap-4">
                             <div class="flex flex-col">
                                 <p class="font-extralight pb-4">Time on Page</p>
-                                <p>{c.timeOnPage}</p>
+                                <h3>{c.after.time}</h3>
                             </div>
-                            <div class="flex flex-col">
-                                <p class="font-extralight pb-4">Bounce Rate</pclass="font-thin">
-                                <p>{c.bounceRate}</p>
-                            </div>
+                            {!c.title.includes('Namaste') && (
+                                <div class="flex flex-col">
+                                    <p class="font-extralight pb-4">
+                                        Bounce Rate
+                                    </p>
+                                    <h3>{c.after.bounce}%</h3>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
 
-                <div class="flex gap-8 py-10 border border-white rounded-full justify-center">
-                    <p>Time on page</p>
-                    <p>Bounce Rate</p>
+                <div class="flex gap-8 py-10 border border-white rounded-full justify-center *:font-extralight *:font-inter">
+                    <p>
+                        Time on page:{' '}
+                        <span class="font-medium">{c.timeOnPage}</span>
+                    </p>
+                    {!c.title.includes('Namaste') && (
+                        <p>
+                            Bounce Rate:{' '}
+                            <span class="font-medium">{c.bounceRate}</span>
+                        </p>
+                    )}
                 </div>
+
+                {c.videoUrl && (
+                    <div class="w-full mt-8">
+                        <video
+                            class="w-full h-auto rounded-4xl bg-black case-study-video"
+                            autoplay
+                            muted
+                            loop
+                            playsinline
+                            preload="metadata"
+                            data-video-id={`results-video-${index}`}
+                            style="background-color: #d4e8d4; opacity: 0; transition: opacity 0.3s;"
+                        >
+                            <source
+                                src={optimizeVideoUrl(c.videoUrl)}
+                                type="video/mp4"
+                            />
+                            <p class="absolute inset-0 flex items-center justify-center text-white bg-black bg-opacity-50">
+                                Your browser doesn't support video playback.
+                            </p>
+                        </video>
+                    </div>
+                )}
             </div>
         ))
     }
 </OutlineContainer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const videos = document.querySelectorAll('video.case-study-video');
+
+        videos.forEach((video) => {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            // Force play when video comes into view
+                            video.play().catch((error) => {
+                                console.log('Autoplay prevented:', error);
+                            });
+                        } else {
+                            // Pause when video goes out of view
+                            if (!video.paused) {
+                                video.pause();
+                            }
+                        }
+                    });
+                },
+                {
+                    threshold: 0.25,
+                    rootMargin: '100px',
+                }
+            );
+
+            observer.observe(video);
+
+            // Handle video load events
+            video.addEventListener('loadeddata', () => {
+                video.style.opacity = '1';
+                // Try to play immediately if video is in viewport
+                const rect = video.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    video.play().catch((error) => {
+                        console.log('Initial autoplay prevented:', error);
+                    });
+                }
+            });
+
+            video.addEventListener('canplay', () => {
+                video.classList.add('ready');
+            });
+
+            video.addEventListener('error', (e) => {
+                console.error('Video error:', e);
+                const container = video.parentElement;
+                if (container) {
+                    container.innerHTML = `
+                        <div class="flex items-center justify-center h-full text-gray-500">
+                            <p>Video unavailable</p>
+                        </div>
+                    `;
+                }
+            });
+        });
+
+        // Handle page visibility changes
+        document.addEventListener('visibilitychange', () => {
+            videos.forEach((video) => {
+                if (document.hidden) {
+                    video.pause();
+                } else {
+                    // Only play if video is in viewport
+                    const rect = video.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        video.play().catch((error) => {
+                            console.log(
+                                'Visibility change autoplay prevented:',
+                                error
+                            );
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+<style>
+    video.case-study-video {
+        background-color: #d4e8d4;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    video.case-study-video.ready {
+        opacity: 1;
+    }
+</style>

@@ -79,6 +79,7 @@ interface CaseStudy {
     bounce: number;
     time: string;
   };
+  videoUrl: string;
 }
 interface UxuiResultsSection extends SectionBase {
   _type: 'uxuiResultsSection';
