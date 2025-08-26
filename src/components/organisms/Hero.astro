@@ -29,8 +29,8 @@ if (!data) return;
 <PageContainer
     extraClass="md:h-[96dvh] h-[105dvh] relative rounded-b-8 overflow-hidden *:text-white"
 >
-    <div class="z-20 flex flex-col justify-center items-center pt-32 relative">
-        <h1 class="text-whit font-light -m-2 md:text-6xl! text-4xl!">
+    <div class="z-20 flex flex-col justify-center items-center md:pt-32 pt-48 relative *:text-center">
+        <h1 class="text-whit font-light md:-m-2 md:text-6xl! text-4xl!">
             {data.title}
         </h1>
         <h3 class="py-6 font-thin">{data.secondaryTitle}</h3>
@@ -38,8 +38,7 @@ if (!data) return;
             set:html={insertBreakAfter(data.description, 'websites')}
             class="text-xl font-inter font-extralight text-center pb-24"></h5>
 
-        <Button text={firstPart} class="block! md:hidden! mt-16 md:mt-0" />
-        <Button text={data.cta} class="hidden! md:block!" />
+        <Button text={data.cta} />
 
         <img src="/down.svg" alt="" class="object-contain mx-auto pt-4" />
     </div>

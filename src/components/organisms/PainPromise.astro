@@ -10,8 +10,8 @@ interface Props {
 const { data } = Astro.props;
 ---
 
-<OutlineContainer extraClass="my-24">
-    <div class="grid grid-cols-2 py-12 px-8">
+<OutlineContainer extraClass="my-24 mx-4 md:mx-0">
+    <div class="grid md:grid-cols-2 grid-cols-1 py-12 px-8">
         <div class="flex flex-col gap-8">
             <p class="font-inter font-extralight">{data?.secondaryTitle}</p>
             <h3>{data?.title}</h3>

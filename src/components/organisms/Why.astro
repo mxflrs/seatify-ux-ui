@@ -10,8 +10,8 @@ const { data } = Astro.props;
 if (!data) return;
 ---
 
-<OutlineContainer extraClass="mt-28">
-    <div class="grid grid-cols-2 items-center gap-24">
+<OutlineContainer extraClass="mt-28 md:mx-0 mx-4">
+    <div class="grid md:grid-cols-2 grid-cols-1 items-center gap-24">
         <div class="flex-flex-col gap-8">
             <p class="font-extralight font-inter mb-8">{data.secondaryTitle}</p>
             <h3>{data.title}</h3>

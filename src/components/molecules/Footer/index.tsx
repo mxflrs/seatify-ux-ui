@@ -15,7 +15,7 @@ const VideoFooter: React.FC<Props> = ({ data }) => {
     }
 
     return (
-        <footer className="bg-gray-200 bg-gradient h-screen flex flex-col justify-center items-center *:text-white full-width mt-24">
+        <footer className="bg-gray-200 bg-gradient h-screen flex flex-col justify-center items-center *:text-white full-width mt-24 px-4 md:px-0 *:text-center">
             <h2 className="font-thin">{data.title1}</h2>
             <h2 className="font-thin py-2">{data.title2}</h2>
             <p className="font-inter">{data.description}</p>
