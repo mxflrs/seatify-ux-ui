@@ -1,5 +1,6 @@
 ---
 import type { UxuiPainPromiseSection } from '../../core/interfaces/landing-page.interface';
+import OutlineContainer from '../molecules/OutlineContainer.astro';
 
 interface Props {
     data?: UxuiPainPromiseSection;
@@ -8,4 +9,12 @@ interface Props {
 const { data } = Astro.props;
 ---
 
-<h1>Pain & Promise</h1>
+<OutlineContainer extraClass="my-20">
+    <div class="grid grid-cols-2">
+        <div class="flex flex-col">
+            <p>{data?.secondaryTitle}</p>
+            <h3>{data?.title}</h3>
+        </div>
+        <p>{data?.description}</p>
+    </div>
+</OutlineContainer>

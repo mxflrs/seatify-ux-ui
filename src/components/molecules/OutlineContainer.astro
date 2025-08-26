@@ -1,0 +1,7 @@
+---
+const { extraClass = "" } = Astro.props;
+---
+
+<div class={`border border-border rounded-4xl md:p-16 p-8 ${extraClass}`}>
+  <slot />
+</div>

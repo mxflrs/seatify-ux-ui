@@ -1,0 +1,64 @@
+---
+import type { UxuiResultsSection } from '../../core/interfaces/landing-page.interface';
+import OutlineContainer from '../molecules/OutlineContainer.astro';
+
+interface Props {
+    data?: UxuiResultsSection;
+}
+
+const { data } = Astro.props;
+if (!data) return;
+---
+
+<OutlineContainer>
+    <div class="grid grid-cols-2">
+        <div class="flex flex-col gap-6">
+            <p>{data.secondaryTitle}</p>
+            <h3>{data.title}</h3>
+        </div>
+        <p>{data.description}</p>
+    </div>
+
+    {
+        data.caseStudies.map((c) => (
+            <div class="flex flex-col gap-4 border-2 border-b-white bg-black m-8 *:text-white p-8 rounded-4xl">
+                <p>{c.subtitle}</p>
+                <h4 class="pb-8 border-b-2 border-white">{c.title}</h4>
+
+                <div class="p-8 grid grid-cols-2 gap-8 rounded-4xl">
+                    <div class="flex flex-col">
+                        <p class="border-b-2 border-b-white">Before</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex flex-col">
+                                <p>Time on Page</p>
+                                <p>{c.timeOnPage}</p>
+                            </div>
+                            <div class="flex flex-col">
+                                <p>Bounce Rate</p>
+                                <p>{c.bounceRate}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col bg-white *:text-black!">
+                        <p class="border-b-2 border-b-black">After</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex flex-col">
+                                <p>Time on Page</p>
+                                <p>{c.timeOnPage}</p>
+                            </div>
+                            <div class="flex flex-col">
+                                <p>Bounce Rate</p>
+                                <p>{c.bounceRate}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-8 py-10 border border-white rounded-4xl justify-center">
+                    <p>Time on page</p>
+                    <p>Bounce Rate</p>
+                </div>
+            </div>
+        ))
+    }
+</OutlineContainer>

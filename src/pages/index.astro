@@ -1,12 +1,13 @@
 ---
 import Layout from "../components/templates/Layout.astro";
 import Hero from "../components/organisms/Hero.astro"
-import Results from "../components/organisms/Results"
+import Results from "../components/organisms/Results.astro"
 import Footer from "../components/molecules/Footer"
 import Services from "../components/organisms/Services.astro";
 import Why from "../components/organisms/Why.astro";
 import { createSectionData, type LandingPage } from "../core/interfaces/landing-page.interface";
 import { client } from "../core/lib/sanity";
+import PainPromise from "../components/organisms/PainPromise.astro";
 
 const landingPage: LandingPage | null =
     (await client.fetch(`*[_type == "landingPage"][0]`)) ?? null;
@@ -16,6 +17,7 @@ const sectionData = createSectionData(landingPage);
 
 <Layout>
 	<Hero data={sectionData.hero}/>
+	<PainPromise data={sectionData.painPromise} />
 	<Services data={sectionData.services} />
 	<Results data={sectionData.results}/>
 	<Why data={sectionData.why} />

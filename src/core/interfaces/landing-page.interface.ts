@@ -53,14 +53,36 @@ interface UxuiPainPromiseSection extends SectionBase {
 
 interface UxuiServicesSection extends SectionBase {
   _type: 'uxuiServicesSection';
-  cards: any[];
+  cards: UxuiServiceCard[];
   secondaryTitle: string;
   title: string;
 }
 
+interface UxuiServiceCard {
+  _key: string;
+  title: string;
+  description: string;
+  icon: SanityImage;
+}
+
+interface CaseStudy {
+  _key: string;
+  title: string;
+  subtitle: string;
+  timeOnPage: string;
+  bounceRate: string;
+  before: {
+    bounce: number;
+    time: string;
+  };
+  after: {
+    bounce: number;
+    time: string;
+  };
+}
 interface UxuiResultsSection extends SectionBase {
   _type: 'uxuiResultsSection';
-  caseStudies: any[];
+  caseStudies: CaseStudy[];
   description: string;
   secondaryTitle: string;
   title: string;

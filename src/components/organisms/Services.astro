@@ -1,5 +1,7 @@
 ---
 import type { UxuiServicesSection } from '../../core/interfaces/landing-page.interface';
+import { sanityImageUrl } from '../../core/utils/sanity-image';
+import OutlineContainer from '../molecules/OutlineContainer.astro';
 
 interface Props {
     data?: UxuiServicesSection;
@@ -8,7 +10,25 @@ interface Props {
 const { data } = Astro.props;
 
 if (!data) return;
-
 ---
 
-<h1>services: {data.title}</h1>
+<section>
+    <p>{data.secondaryTitle}</p>
+    <h2>{data.title}</h2>
+
+    <div class="grid md:grid-cols-3 gap-8 py-8">
+        {
+            data.cards.map((c) => (
+                <OutlineContainer>
+                    <img
+                        src={sanityImageUrl(c.icon.asset._ref, 200, 200)}
+                        alt=""
+                        class="object-cover w-24 pb-2"
+                    />
+                    <h3>{c.title}</h3>
+                    <p class="font-inter text-thin">{c.description}</p>
+                </OutlineContainer>
+            ))
+        }
+    </div>
+</section>
