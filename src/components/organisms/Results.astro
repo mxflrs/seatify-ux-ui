@@ -1,5 +1,6 @@
 ---
 import type { UxuiResultsSection } from '../../core/interfaces/landing-page.interface';
+import { insertBreakAfter } from '../../core/utils/insert-break';
 import OutlineContainer from '../molecules/OutlineContainer.astro';
 
 interface Props {
@@ -10,51 +11,54 @@ const { data } = Astro.props;
 if (!data) return;
 ---
 
-<OutlineContainer>
-    <div class="grid grid-cols-2">
+<OutlineContainer extraClass="mt-32 px-20! py-24!">
+    <div class="grid grid-cols-2 items-center pb-12 gap-6">
         <div class="flex flex-col gap-6">
-            <p>{data.secondaryTitle}</p>
+            <p class="font-inter font-light">{data.secondaryTitle}</p>
             <h3>{data.title}</h3>
         </div>
-        <p>{data.description}</p>
+        <p
+            set:html={insertBreakAfter(data?.description, 'off.', 'pt-4')}
+            class="font-inter font-light"
+        />
     </div>
 
     {
         data.caseStudies.map((c) => (
-            <div class="flex flex-col gap-4 border-2 border-b-white bg-black m-8 *:text-white p-8 rounded-4xl">
-                <p>{c.subtitle}</p>
-                <h4 class="pb-8 border-b-2 border-white">{c.title}</h4>
+            <div class="flex flex-col gap-4 border-2 border-b-white bg-black my-8 mx-4 *:text-white p-20 rounded-[88px]">
+                <p class="font-inter font-light">{c.subtitle}</p>
+                <h4 class="pb-9 border-b pt-4 border-white">{c.title}</h4>
 
-                <div class="p-8 grid grid-cols-2 gap-8 rounded-4xl">
-                    <div class="flex flex-col">
-                        <p class="border-b-2 border-b-white">Before</p>
+                <div class="py-8 px-0 grid grid-cols-2 gap-8 rounded-4xl *:font-inter">
+                    <div class="flex flex-col p-12">
+                        <p class="border-b border-b-white pb-3 mb-3">Before</p>
                         <div class="grid grid-cols-2 gap-4">
                             <div class="flex flex-col">
-                                <p>Time on Page</p>
+                                <p class="font-extralight pb-4">Time on Page</p>
                                 <p>{c.timeOnPage}</p>
                             </div>
                             <div class="flex flex-col">
-                                <p>Bounce Rate</p>
+                                <p class="font-extralight pb-4">Bounce Rate</p>
                                 <p>{c.bounceRate}</p>
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-col bg-white *:text-black!">
-                        <p class="border-b-2 border-b-black">After</p>
+                    <div class="flex flex-col bg-white *:text-black! p-12 rounded-4xl">
+                        <p class="border-b border-b-black pb-3 mb-3">After</p>
                         <div class="grid grid-cols-2 gap-4">
                             <div class="flex flex-col">
-                                <p>Time on Page</p>
+                                <p class="font-extralight pb-4">Time on Page</p>
                                 <p>{c.timeOnPage}</p>
                             </div>
                             <div class="flex flex-col">
-                                <p>Bounce Rate</p>
+                                <p class="font-extralight pb-4">Bounce Rate</pclass="font-thin">
                                 <p>{c.bounceRate}</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="flex gap-8 py-10 border border-white rounded-4xl justify-center">
+                <div class="flex gap-8 py-10 border border-white rounded-full justify-center">
                     <p>Time on page</p>
                     <p>Bounce Rate</p>
                 </div>

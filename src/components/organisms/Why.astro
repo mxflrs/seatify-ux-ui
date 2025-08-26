@@ -10,13 +10,13 @@ const { data } = Astro.props;
 if (!data) return;
 ---
 
-<OutlineContainer extraClass="my-16">
-    <div class="grid grid-cols-2">
+<OutlineContainer extraClass="mt-16 mb-32">
+    <div class="grid grid-cols-2 items-center gap-24">
         <div class="flex-flex-col gap-8">
-            <p>{data.secondaryTitle}</p>
+            <p class="font-extralight font-inter mb-8">{data.secondaryTitle}</p>
             <h3>{data.title}</h3>
         </div>
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-12 py-8">
             {
                 data.details.map(d => (
                     <p class="border-b border-b-black/20 pb-2 font-inter font-light">{d}</p>

@@ -13,20 +13,20 @@ if (!data) return;
 ---
 
 <section>
-    <p>{data.secondaryTitle}</p>
-    <h2>{data.title}</h2>
+    <p class="pt-16 font-inter font-extralight">{data.secondaryTitle}</p>
+    <h3 class="pt-12 pb-8 text-[32px]">{data.title}</h3>
 
-    <div class="grid md:grid-cols-3 gap-8 py-8">
+    <div class="grid md:grid-cols-3 gap-10 py-8">
         {
             data.cards.map((c) => (
-                <OutlineContainer>
+                <OutlineContainer extraClass="px-12! pt-10! pb-32! font-inter">
                     <img
                         src={sanityImageUrl(c.icon.asset._ref, 200, 200)}
                         alt=""
                         class="object-cover w-24 pb-2"
                     />
-                    <h3>{c.title}</h3>
-                    <p class="font-inter text-thin">{c.description}</p>
+                    <h4 class="font-light pt-8">{c.title}</h4>
+                    <p class="font-inter font-extralight">{c.description}</p>
                 </OutlineContainer>
             ))
         }
