@@ -1,0 +1,7 @@
+---
+const { extraClass = "" } = Astro.props;
+---
+
+<div class={`flex flex-col items-center justify-center container mx-auto p-8 box-border ${extraClass}`}>
+  <slot />
+</div>

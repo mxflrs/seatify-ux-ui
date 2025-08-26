@@ -1,5 +1,14 @@
 ---
+import type { UxuiServicesSection } from '../../core/interfaces/landing-page.interface';
+
+interface Props {
+    data?: UxuiServicesSection;
+}
+
+const { data } = Astro.props;
+
+if (!data) return;
 
 ---
 
-<h1>Services</h1>
+<h1>services: {data.title}</h1>

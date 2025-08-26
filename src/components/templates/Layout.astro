@@ -32,9 +32,9 @@ const brandConfig: BrandConfig | null =
         />
         <title>Seatify - Media & Marketing</title>
     </head>
-    <body class="bg-red-400">
+    <body class="">
         <main class="container mx-auto">
-            <Navbar client:load />
+            <Navbar brand={brandConfig} client:load />
             <slot />
             <ContactDialog client:load />
         </main>

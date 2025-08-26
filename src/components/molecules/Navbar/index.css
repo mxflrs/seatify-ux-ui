@@ -1,0 +1,13 @@
+.nav-content {
+  height: 75px;
+  width: 313px;
+  background-color: #ffffff25;
+  border: 1px solid #ffffff25;
+  padding: 0 1.5rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.divider {
+  border-color: #ffffff25;
+}

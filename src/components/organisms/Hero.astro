@@ -1,0 +1,73 @@
+---
+import type { UxuiHeroSection } from '../../core/interfaces/landing-page.interface';
+import { insertBreakAfter } from '../../core/utils/insert-break';
+import { sanityImageUrl } from '../../core/utils/sanity-image';
+import Button from '../atoms/Button.astro';
+import Navbar from '../molecules/Navbar';
+import PageContainer from '../molecules/PageContainer.astro';
+
+interface Props {
+    data?: UxuiHeroSection;
+}
+
+const { data } = Astro.props;
+
+const bgUrl = data?.image?.asset._ref
+    ? `url('${sanityImageUrl(data?.image.asset._ref, 2000, 2000)}')`
+    : '';
+
+const videoUrl = data?.videoUrl;
+
+// Split CTA into all but last word and last word
+let ctaWords = data?.cta?.split(' ') ?? [];
+let lastWord = ctaWords.pop();
+let firstPart = ctaWords.join(' ');
+
+if (!data) return;
+---
+
+<PageContainer
+    extraClass="md:h-[96dvh] h-[105dvh] relative rounded-b-8 overflow-hidden *:text-white"
+>
+    <div class="z-20 flex flex-col justify-center items-center pt-32 relative">
+        <h1 class="text-whit font-light -m-2 md:text-6xl! text-4xl!">
+            {data.title}
+        </h1>
+        <h3 class="py-6 font-thin">{data.secondaryTitle}</h3>
+        <h5
+            set:html={insertBreakAfter(data.description, 'websites')}
+            class="text-xl font-inter font-extralight text-center pb-24"></h5>
+
+        <Button text={firstPart} class="block! md:hidden! mt-16 md:mt-0" />
+        <Button text={data.cta} class="hidden! md:block!" />
+
+        <img src="/down.svg" alt="" class="object-contain mx-auto pt-8" />
+    </div>
+
+    {
+        videoUrl && (
+            <video
+                autoplay
+                muted
+                loop
+                playsinline
+                class="absolute inset-0 w-full h-full object-cover z-0 rounded-b-4xl"
+            >
+                <source src={videoUrl} type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+        )
+    }
+
+    {
+        !videoUrl && (
+            <div
+                class="bg-image absolute inset-0 bg-center bg-cover z-0 rounded-b-4xl"
+                style={`background-image: ${bgUrl};`}
+            />
+        )
+    }
+
+    <div class="absolute inset-0 bg-black/30 z-10 rounded-b-4xl"></div>
+</PageContainer>
+)

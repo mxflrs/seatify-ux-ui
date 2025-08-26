@@ -1,4 +1,12 @@
 ---
+import type { UxuiWhySection } from '../../core/interfaces/landing-page.interface';
+
+interface Props {
+    data?: UxuiWhySection;
+}
+
+const { data } = Astro.props;
+if (!data) return;
 ---
 
-<h1>Why</h1>
+<h1>{data.title}</h1>

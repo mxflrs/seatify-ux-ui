@@ -34,12 +34,14 @@ interface SectionBase extends SanityBase {
   _key: string;
 }
 
-interface HeroSection extends SectionBase {
-  _type: 'heroSection';
+interface UxuiHeroSection extends SectionBase {
+  _type: 'uxuiHeroSection';
   cta: string;
   description: string;
   secondaryTitle: string;
   title: string;
+  image?: SanityImage;
+  videoUrl: string;
 }
 
 interface UxuiPainPromiseSection extends SectionBase {
@@ -82,7 +84,7 @@ interface UxuiFooterSection extends SectionBase {
 }
 
 type Section =
-  | HeroSection
+  | UxuiHeroSection
   | UxuiPainPromiseSection
   | UxuiServicesSection
   | UxuiResultsSection
@@ -92,9 +94,52 @@ type Section =
 interface LandingPage extends SanityBase {
   _type: 'landingPage';
   _system: SanitySystem;
-  sections: Section[];
+  sections?: Section[];
   slug: SanitySlug;
   title: string;
   image?: SanityImage;
   description?: string;
 }
+
+export const getSection = <T extends Section['_type']>(
+  landingPage: LandingPage | null,
+  type: T
+): Extract<Section, { _type: T }> | undefined => {
+  return landingPage?.sections?.find((section): section is Extract<Section, { _type: T }> =>
+    section._type === type
+  );
+};
+
+export interface SectionData {
+  hero: UxuiHeroSection | undefined;
+  painPromise: UxuiPainPromiseSection | undefined;
+  services: UxuiServicesSection | undefined;
+  results: UxuiResultsSection | undefined;
+  why: UxuiWhySection | undefined;
+  footer: UxuiFooterSection | undefined;
+}
+
+export const createSectionData = (landingPage: LandingPage | null): SectionData => ({
+  hero: getSection(landingPage, 'uxuiHeroSection'),
+  painPromise: getSection(landingPage, 'uxuiPainPromiseSection'),
+  services: getSection(landingPage, 'uxuiServicesSection'),
+  results: getSection(landingPage, 'uxuiResultsSection'),
+  why: getSection(landingPage, 'uxuiWhySection'),
+  footer: getSection(landingPage, 'uxuiFooterSection'),
+});
+
+export type {
+  SanityBase,
+  SanityReference,
+  SanityImage,
+  SanitySlug,
+  SanitySystem,
+  UxuiHeroSection,
+  UxuiPainPromiseSection,
+  UxuiServicesSection,
+  UxuiResultsSection,
+  UxuiWhySection,
+  UxuiFooterSection,
+  Section,
+  LandingPage,
+};

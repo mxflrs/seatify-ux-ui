@@ -1,18 +1,23 @@
 ---
 import Layout from "../components/templates/Layout.astro";
-import Hero from "../components/organisms/Hero"
+import Hero from "../components/organisms/Hero.astro"
 import Results from "../components/organisms/Results"
 import Footer from "../components/molecules/Footer"
 import Services from "../components/organisms/Services.astro";
 import Why from "../components/organisms/Why.astro";
+import { createSectionData, type LandingPage } from "../core/interfaces/landing-page.interface";
+import { client } from "../core/lib/sanity";
 
-// *[_type == "landingPage" && title == "UXUI"]
+const landingPage: LandingPage | null =
+    (await client.fetch(`*[_type == "landingPage"][0]`)) ?? null;
+
+const sectionData = createSectionData(landingPage);
 ---
 
 <Layout>
-	<Hero /> 
-	<Services />
-	<Results />
-	<Why />
-	<Footer />
+	<Hero data={sectionData.hero}/>
+	<Services data={sectionData.services} />
+	<Results data={sectionData.results}/>
+	<Why data={sectionData.why} />
+	<Footer data={sectionData.footer} />
 </Layout>

@@ -133,7 +133,7 @@ export const ContactDialog = () => {
 
               <div className="flex flex-center justify-center -mt-5 *:text-xs *:text-sf-lila-2">
                 <a href="/privacy" target='_blank' className='border-r border-white pr-4 mr-4'>Privacy Policy</a>
-                <a href="/terms-conditions" target='_blank'>Terms</a>
+                <a href="https://seatify.io/terms-conditions/" target='_blank'>Terms</a>
               </div>
 
               {result && !result.startsWith('Thanks') && (
