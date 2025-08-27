@@ -2,6 +2,7 @@
 import type { UxuiHeroSection } from '../../core/interfaces/landing-page.interface';
 import { insertBreakAfter } from '../../core/utils/insert-break';
 import { sanityImageUrl } from '../../core/utils/sanity-image';
+import Btn from '../atoms/Btn';
 import Button from '../atoms/Button.astro';
 import Navbar from '../molecules/Navbar';
 import PageContainer from '../molecules/PageContainer.astro';
@@ -38,7 +39,7 @@ if (!data) return;
             set:html={insertBreakAfter(data.description, 'websites')}
             class="text-xl font-inter font-extralight text-center pb-24"></h5>
 
-        <Button text={data.cta} />
+        <Btn text={data.cta} client:load />
 
         <img src="/down.svg" alt="" class="object-contain mx-auto pt-4" />
     </div>
