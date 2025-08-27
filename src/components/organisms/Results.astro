@@ -20,11 +20,15 @@ function optimizeVideoUrl(url: string) {
 }
 ---
 
-<OutlineContainer extraClass="mt-32 md:px-20! py-24! md:mx-0 mx-4">
-    <div class="grid md:grid-cols-2 grid-cols-1 items-center pb-12 gap-6">
+<OutlineContainer
+    extraClass="md:mt-32 mt-12 md:px-20! px-8! md:py-24! py-10! md:mx-0 mx-4"
+>
+    <div
+        class="grid md:grid-cols-2 grid-cols-1 items-center md:pb-12 pb-8 gap-6"
+    >
         <div class="flex flex-col gap-6">
             <p class="font-inter font-light">{data.secondaryTitle}</p>
-            <h3>{data.title}</h3>
+            <h3 class="md:pb-0 pb-16">{data.title}</h3>
         </div>
         <p
             set:html={insertBreakAfter(data?.description, 'off.', 'pt-4')}
@@ -32,95 +36,109 @@ function optimizeVideoUrl(url: string) {
         />
     </div>
 
-    {
-        data.caseStudies.map((c, index) => (
-            <div class="flex flex-col gap-4 border-2 border-b-white bg-black my-8 md:mx-4 -mx-4 *:text-white md:p-20 p-8 md:rounded-[88px] rounded-4xl">
-                <p class="font-inter font-thin">{c.subtitle}</p>
-                <h4 class="pb-9 border-b pt-4 border-white">{c.title}</h4>
+    <div class="flex flex-col gap-8 md:gap-16">
+        {
+            data.caseStudies.map((c, index) => (
+                <div class="flex flex-col gap-4 border-2 border-b-white bg-black md:mx-4 -mx-4 *:text-white md:p-20 p-8 md:rounded-[88px] rounded-4xl">
+                    <p class="font-inter font-thin">{c.subtitle}</p>
+                    <h4 class="md:pb-9 pb-4 border-b pt-4 border-white">
+                        {c.title}
+                    </h4>
 
-                <div class="py-8 px-0 grid md:grid-cols-2 grid-cols-1 gap-8 rounded-4xl *:font-inter">
-                    <div class="flex flex-col md:p-12 p-6">
-                        <p class="border-b border-b-white pb-3 mb-3">Before</p>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="flex flex-col">
-                                <p class="font-extralight pb-4">Time on Page</p>
-                                <h3>{c.before.time}</h3>
-                            </div>
-                            {!c.title.includes('Namaste') && (
+                    <div class="py-8 px-0 grid md:grid-cols-2 grid-cols-1 gap-8 rounded-4xl *:font-inter">
+                        <div class="flex flex-col md:p-12 p-0">
+                            <p class="border-b border-b-white pb-3 mb-3 md:text-base! text-xs!">
+                                Before
+                            </p>
+                            <div class="grid grid-cols-2 gap-4">
                                 <div class="flex flex-col">
-                                    <p class="font-extralight pb-4">
-                                        {c.title.includes('Jeff')
-                                            ? 'Booking Conversions'
-                                            : 'Bounce Rate'}
+                                    <p class="font-extralight pb-4 md:text-base! text-xs!">
+                                        Time on Page
                                     </p>
-
-                                    <h3>
-                                        {c.before.bounce}{' '}
-                                        {c.title.includes('Jeff')
-                                            ? '/month'
-                                            : '%'}
-                                    </h3>
+                                    <h3>{c.before.time}</h3>
                                 </div>
-                            )}
+                                {!c.title.includes('Namaste') && (
+                                    <div class="flex flex-col">
+                                        <p class="font-extralight pb-4 md:text-base! text-xs!">
+                                            {c.title.includes('Jeff')
+                                                ? 'Booking Conversions'
+                                                : 'Bounce Rate'}
+                                        </p>
+
+                                        <h3>
+                                            {c.before.bounce}{' '}
+                                            {c.title.includes('Jeff')
+                                                ? '/month'
+                                                : '%'}
+                                        </h3>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                        <div class="flex flex-col bg-white *:text-black! md:p-12 p-6 md:rounded-4xl rounded-3xl -mx-2 md:mx-0">
+                            <p class="border-b border-b-black pb-3 mb-3 md:text-base! text-xs!">
+                                After
+                            </p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="flex flex-col">
+                                    <p class="font-extralight pb-4 md:text-base! text-xs!">
+                                        Time on Page
+                                    </p>
+                                    <h3>{c.after.time}</h3>
+                                </div>
+                                {!c.title.includes('Namaste') && (
+                                    <div class="flex flex-col">
+                                        <p class="font-extralight pb-4 md:text-base! text-xs!">
+                                            Bounce Rate
+                                        </p>
+                                        <h3>{c.after.bounce}%</h3>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
-                    <div class="flex flex-col bg-white *:text-black! md:p-12 p-6 rounded-4xl">
-                        <p class="border-b border-b-black pb-3 mb-3">After</p>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="flex flex-col">
-                                <p class="font-extralight pb-4">Time on Page</p>
-                                <h3>{c.after.time}</h3>
-                            </div>
-                            {!c.title.includes('Namaste') && (
-                                <div class="flex flex-col">
-                                    <p class="font-extralight pb-4">
-                                        Bounce Rate
-                                    </p>
-                                    <h3>{c.after.bounce}%</h3>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </div>
 
-                <div class="flex gap-8 py-10 border border-white rounded-full justify-center *:font-extralight *:font-inter">
-                    <p>
-                        Time on page:{' '}
-                        <span class="font-medium">{c.timeOnPage}</span>
-                    </p>
-                    {!c.title.includes('Namaste') && (
+                    <div class="flex md:gap-8 gap-2 md:py-10 py-6 -mx-4 md:mx-0 px-8 border border-white rounded-full justify-center *:font-extralight *:font-inter *:md:text-base! *:text-xs!">
                         <p>
-                            Bounce Rate:{' '}
-                            <span class="font-medium">{c.bounceRate}</span>
+                            {c.title.includes('Namaste')
+                                ? 'Sales growth:'
+                                : 'Time on page:'}
+                            <span class="font-medium">{c.timeOnPage}</span>
                         </p>
+                        {!c.title.includes('Namaste') && (
+                            <p>
+                                Bounce Rate:{' '}
+                                <span class="font-medium">{c.bounceRate}</span>
+                            </p>
+                        )}
+                    </div>
+
+                    {c.videoUrl && (
+                        <div class="w-full mt-8">
+                            <video
+                                class="w-full h-auto rounded-4xl bg-black case-study-video"
+                                autoplay
+                                muted
+                                loop
+                                playsinline
+                                preload="metadata"
+                                data-video-id={`results-video-${index}`}
+                                style="background-color: #d4e8d4; opacity: 0; transition: opacity 0.3s;"
+                            >
+                                <source
+                                    src={optimizeVideoUrl(c.videoUrl)}
+                                    type="video/mp4"
+                                />
+                                <p class="absolute inset-0 flex items-center justify-center text-white bg-black bg-opacity-50">
+                                    Your browser doesn't support video playback.
+                                </p>
+                            </video>
+                        </div>
                     )}
                 </div>
-
-                {c.videoUrl && (
-                    <div class="w-full mt-8">
-                        <video
-                            class="w-full h-auto rounded-4xl bg-black case-study-video"
-                            autoplay
-                            muted
-                            loop
-                            playsinline
-                            preload="metadata"
-                            data-video-id={`results-video-${index}`}
-                            style="background-color: #d4e8d4; opacity: 0; transition: opacity 0.3s;"
-                        >
-                            <source
-                                src={optimizeVideoUrl(c.videoUrl)}
-                                type="video/mp4"
-                            />
-                            <p class="absolute inset-0 flex items-center justify-center text-white bg-black bg-opacity-50">
-                                Your browser doesn't support video playback.
-                            </p>
-                        </video>
-                    </div>
-                )}
-            </div>
-        ))
-    }
+            ))
+        }
+    </div>
 </OutlineContainer>
 
 <script>

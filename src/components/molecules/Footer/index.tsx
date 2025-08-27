@@ -15,13 +15,13 @@ const VideoFooter: React.FC<Props> = ({ data }) => {
     }
 
     return (
-        <footer className="bg-gray-200 bg-gradient h-screen flex flex-col justify-center items-center *:text-white full-width mt-24 px-4 md:px-0 *:text-center">
+        <footer className="bg-gray-200 bg-gradient h-screen flex flex-col justify-center items-center *:text-white full-width mt-24 px-8 md:px-0 *:text-center">
             <h2 className="font-thin">{data.title1}</h2>
             <h2 className="font-thin py-2">{data.title2}</h2>
             <p className="font-inter">{data.description}</p>
             <button
                 onClick={open}
-                className="button-gradient my-24 inline-flex items-center justify-center rounded-full font-thin transition-all duration-200 mx-auto ring-1 ring-white/25 hover:ring-white/50 cursor-pointer px-8 py-4 text-base bg-black text-black! hover:bg-sfv-green-600 hover:text-black select-none"
+                className="button-gradient md:my-24 my-8 inline-flex items-center justify-center rounded-full font-thin transition-all duration-200 mx-auto ring-1 ring-white/25 hover:ring-white/50 cursor-pointer px-8 py-4 text-base bg-black text-black! hover:bg-sfv-green-600 hover:text-black select-none"
             >
                 {data.cta}
             </button>
