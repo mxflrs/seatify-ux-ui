@@ -2,7 +2,7 @@ import { useState, type ChangeEvent } from 'react';
 import './index.css';
 import { useContactDialogStore } from '../../../core/store/contactDialogStore';
 export const ContactDialog = () => {
-  const {close, isOpen} = useContactDialogStore();
+  const { close, isOpen } = useContactDialogStore();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -55,20 +55,28 @@ export const ContactDialog = () => {
   if (!isOpen) return;
 
   return (
-    <dialog className='w-full h-full z-[999] fixed inset-0 flex justify-center items-center backdrop-blur-sm bg-transparent'>
-      <div className="flex items-center justify-center p-4 z-50 backdrop-blur-sm relative">
+    <dialog className='fixed inset-0 z-[999] flex justify-center items-center bg-transparent backdrop-blur-sm w-full h-full'>
+      <div className="flex items-center justify-center p-2 sm:p-4 z-50 backdrop-blur-sm relative w-full h-full">
         <button
-          className='absolute top-1 right-1 text-white text-2xl z-50 h-9 w-9 bg-sfv-gray-400 rounded-full hover:bg-sfv-gray-500 cursor-pointer'
+          className='absolute top-2 right-2 text-white text-2xl z-50 h-9 w-9 bg-sfv-gray-400 rounded-full hover:bg-sfv-gray-500 cursor-pointer'
           onClick={close}
           aria-label="Close dialog"
         >
           <i className="ri-close-large-line ri-sm"></i>
         </button>
 
-        <div className="bg-sfv-gray-500 rounded-2xl shadow-lg w-[800px] h-[600px] relative grid xl:grid-cols-2 grid-cols-1 gap-4 overflow-hidden">
-          <div className="flex flex-col bg-black bg-image lg:justify-center justify-end items-start text-white p-6 relative w-full lg:h-full h-[182px]">
-            <h1 className="text-3xl z-10">Content that engages,</h1>
-            <p className='z-10 text-xl pt-1'>converts, and drives results.</p>
+        <div className="
+        bg-sfv-gray-500 rounded-2xl shadow-lg
+        w-full max-w-[95vw] sm:max-w-[800px]
+        h-auto
+        relative grid xl:grid-cols-2 grid-cols-1 gap-4 overflow-hidden
+      ">
+          <div className="
+          flex flex-col bg-black bg-image lg:justify-center justify-end items-start text-white p-6 relative w-full
+          lg:h-full h-[182px] min-h-[120px]
+        ">
+            <h1 className="text-2xl sm:text-3xl z-10">Content that engages,</h1>
+            <p className='z-10 text-lg sm:text-xl pt-1'>converts, and drives results.</p>
             <div className="absolute flex justify-center items-center bg-black opacity-50 h-full w-full inset-0"></div>
           </div>
 
