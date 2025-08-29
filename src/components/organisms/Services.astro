@@ -16,10 +16,10 @@ if (!data) return;
     <p class="md:pt-16 pt-0 font-inter font-extralight">{data.secondaryTitle}</p>
     <h3 class="md:pt-12 pt-8 md:pb-8 pb-2 text-[32px]">{data.title}</h3>
 
-    <div class="grid md:grid-cols-3 gap-10 py-8">
+    <div class="grid lg:grid-cols-3 gap-10 py-8">
         {
             data.cards.map((c) => (
-                <OutlineContainer extraClass="md:px-12! px-8! pt-10! md:pb-32! pb-28! font-inter">
+                <OutlineContainer extraClass="lg:px-12! px-8! pt-10! lg:pb-32! pb-28! font-inter">
                     <img
                         src={sanityImageUrl(c.icon.asset._ref, 200, 200)}
                         alt=""
