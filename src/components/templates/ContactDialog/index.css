@@ -1,5 +1,20 @@
 .bg-image {
-    background-image: url('../../../assets/contactpic.webp');
+    background-image: url("../../../assets/contactpic.webp");
     background-size: cover;
     background-position: center;
+}
+
+.bg-image,
+.black-overlay {
+    border-top-left-radius: var(--radius-2xl); /* 2rem = 32px */
+    border-top-right-radius: var(--radius-2xl); /* 2rem = 32px */
+    border-bottom-left-radius: 0;
+}
+
+@media (width >= 80rem) {
+    .bg-image,
+    .black-overlay {
+        border-top-right-radius: 0;
+        border-bottom-left-radius: var(--radius-2xl); /* 2rem = 32px */
+    }
 }
